@@ -1,4 +1,6 @@
 #!/bin/sh
+MASTER_ADDR:=`drill +short $MASTER_HOST`
+
 cat <<EOF > /etc/nsd/nsd.conf
 server:
 	debug-mode: yes
@@ -12,6 +14,6 @@ remote-control:
 pattern:
 	name: "slave"
 	zonefile: "%s.zone"
-	allow-notify: ${MASTER_HOST:-0.0.0.0} ${AXFR_NOTIFY_KEY:-NOKEY}
-	request-xfr: ${MASTER_HOST:-0.0.0.0} ${AXFR_REQUEST_KEY:-NOKEY}
+	allow-notify: $MASTER_ADDR ${AXFR_NOTIFY_KEY:-NOKEY}
+	request-xfr: $MASTER_ADDR ${AXFR_REQUEST_KEY:-NOKEY}
 EOF
