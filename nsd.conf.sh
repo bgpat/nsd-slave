@@ -1,5 +1,5 @@
 #!/bin/sh
-MASTER_ADDR:=`drill +short $MASTER_HOST`
+MASTER_ADDR=${MASTER_ADDR:-`drill +short $MASTER_HOST`}
 
 cat <<EOF > /etc/nsd/nsd.conf
 server:
